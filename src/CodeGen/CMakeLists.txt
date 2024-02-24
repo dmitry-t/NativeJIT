@@ -69,4 +69,6 @@ source_group("inc/NativeJIT" FILES ${PUBLIC_HFILES})
 
 add_library(CodeGen ${CPPFILES} ${PRIVATE_HFILES} ${PUBLIC_HFILES})
 
+target_include_directories(CodeGen PUBLIC ${NativeJIT_SOURCE_DIR}/inc)
+
 set_property(TARGET CodeGen PROPERTY FOLDER "${NATIVEJIT_PREFIX}src")

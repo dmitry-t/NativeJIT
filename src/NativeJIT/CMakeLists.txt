@@ -43,6 +43,8 @@ source_group("inc/NativeJIT" FILES ${PUBLIC_HFILES})
 
 add_library(NativeJIT ${CPPFILES} ${PRIVATE_HFILES} ${PUBLIC_HFILES})
 
+target_include_directories(NativeJIT PUBLIC ${NativeJIT_SOURCE_DIR}/inc)
+
 set_property(TARGET NativeJIT PROPERTY FOLDER "${NATIVEJIT_PREFIX}src")
 
 add_test(NAME NativeJITTest COMMAND NativeJITTest)

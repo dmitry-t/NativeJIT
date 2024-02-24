@@ -52,11 +52,13 @@ endif()
 
 # gtest
 
-add_subdirectory(googletest)
+if(NativeJIT_BUILD_TESTS)
+  add_subdirectory(googletest)
 
-include_directories(
-  ${gtest_SOURCE_DIR}/include
-)
+  include_directories(
+    ${gtest_SOURCE_DIR}/include
+  )
+endif()
 
 ###############################################################################
 
@@ -64,15 +66,16 @@ include_directories(
 # This allows the solution to group projects into folders like src and test.
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-enable_testing()
+if(NativeJIT_BUILD_TESTS)
+  enable_testing()
+  add_subdirectory(test/CodeGen)
+  add_subdirectory(test/NativeJIT)
+  add_subdirectory(test/Shared)
+  add_subdirectory(Examples) # ...
+endif()
 
-include_directories(inc)
 add_subdirectory(src/CodeGen)
 add_subdirectory(src/NativeJIT)
-add_subdirectory(test/CodeGen)
-add_subdirectory(test/NativeJIT)
-add_subdirectory(test/Shared)
-add_subdirectory(Examples)
 
 add_custom_target(TOPLEVEL_NATIVEJIT SOURCES
   Configure_Make.bat
